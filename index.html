@@ -3,10 +3,26 @@
   <head>
     <meta charset="utf-8">
     <title>Redirecting...</title>
-    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="refresh" content="0; url=https://gemini.google.com/app?hl=en-IN">
     <script>
-      window.location.replace("https://gemini.google.com/app?hl=en-IN");
+      // ==========================================
+      // ==========================================
+      // EDIT ONLY THIS ONE LINE BELOW:
+      
+      const TARGET_URL = "https://gemini.google.com/app?hl=en-IN";
+      
+      // ==========================================
+      // ==========================================
+
+      // Live cache-buster: grabs your latest commit directly from GitHub
+      fetch("https://raw.githubusercontent.com/NANDHA0804/v2/main/index.html?t=" + Date.now(), { cache: "no-store" })
+        .then(r => r.text())
+        .then(html => {
+          const match = html.match(/const TARGET_URL\s*=\s*["']([^"']+)["']/);
+          window.location.replace(match ? match[1] : TARGET_URL);
+        })
+        .catch(() => {
+          window.location.replace(TARGET_URL);
+        });
     </script>
   </head>
   <body style="background-color: #000000;"></body>
